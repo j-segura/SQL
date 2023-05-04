@@ -44,28 +44,24 @@ CREATE TABLE empleados(
 GO
 
 INSERT INTO departamentos(id, nombre, cod) VALUES(1, 'Antioquia', 'Ant'),
-											(2, 'Valle', 'Val'),
-											(3, 'Bolivar', 'Bol'),
-											(4, 'Quindio', 'Qui'),
-											(5, 'Norte Santander', 'Nsa'),
-											(6, 'Santander', 'San')
+	|
 
 GO
 
 INSERT INTO cuidades(id, id_dpto, nombre) VALUES(2, 2, 'Cali'),
-												(3, 1, 'Medellin'),
-												(4, 1, 'Girardota'),
-												(5, 5, 'Cucuta'),
-												(6, 6, 'Bucaramanga'),
-												(1, 2, 'Tulua')
+	(3, 1, 'Medellin'),
+	(4, 1, 'Girardota'),
+	(5, 5, 'Cucuta'),
+	(6, 6, 'Bucaramanga'),
+	(1, 2, 'Tulua')
 
 GO
 
 INSERT INTO cargos(id, nombre, salario) VALUES(1, 'Operario', 990),
-											(2, 'Ayudante', 780),
-											(3, 'Secretaria Gral', 1100),
-											(4, 'Jefe Contabilidad', 3900),
-											(5, 'Gerente General', 7200)
+	(2, 'Ayudante', 780),
+	(3, 'Secretaria Gral', 1100),
+	(4, 'Jefe Contabilidad', 3900),
+	(5, 'Gerente General', 7200)
 
 GO
 
@@ -78,6 +74,7 @@ INSERT INTO empleados(id, nombre, apellido, fechaNacimiento, cargo_id, ciudad_id
 	(703050, 'Carlos', 'Carrillo', '31 diciembre, 1988', 3, 3, 'Circunv 15 # 102-32', 3033030)
 
 GO
+
 -- Recuperacion de informacion ---------------------------------------------------------------------------
 
 -- Mostrar los datos de cada una de las tablas
@@ -180,7 +177,8 @@ GO
 -- Insertar los nuevos cargos de: Mensajero(60) con un salario $850, Jefe de sistemas(40) con salario de $3850
 
 INSERT INTO cargos(id, nombre, salario) VALUES (60, 'Mensajero', 850),
-											(40, 'Jefe de sistemas', 3850)
+	(40, 'Jefe de sistemas', 3850)
+
 GO
 
 -- Mostrar el primer empleado cuyos datos esten ordenados por la fecha de nacimiento de forma descendente
@@ -198,8 +196,9 @@ GO
 -- Inserta las nuevas Ciudades de Envigado (Antioquia), Turbaco(TUR) (Bolivar), Armenia(ARM)) (Quindio).
 
 INSERT INTO cuidades(id, id_dpto, nombre) VALUES (7, 1, 'Evigado'),
-												(8, 3, 'Turbaco'),
-												(9, 4, 'Armenia')
+	(8, 3, 'Turbaco'),
+	(9, 4, 'Armenia')
+
 GO
 
 /* Inserta los nuevos Empleados: 
@@ -251,24 +250,57 @@ tabla para agregar una nueva columna de código postal, que se llame: intCod_Pos
 que va a ser de tipo INTEGER que no acepte nulos, y que no tenga ningún valor por defecto.
 Como lo haría? */
 
-SELECT * FROM cuidades
-
 ALTER TABLE cuidades ADD cod_postal int default 0 not null
+
+GO
 
 -- Actualizar los códigos postales a las ciudades acorde al sistema de telefonía nacional vigente.
 
 UPDATE cuidades SET cod_postal = 1234 WHERE cod = 1
 
--- Mostrar los Empleados sus trabajan en el departamento de Antioquia (Sin utilizar las uniones, ni el join).
+GO
+
+-- Mostrar los Empleados que trabajan en el departamento de Antioquia (Sin utilizar las uniones, ni el join).
+
+SELECT
+	nombre,
+	(SELECT
+		(SELECT nombre FROM departamentos WHERE cuidades.id_dpto = departamentos.id) as departamento
+	FROM
+		cuidades WHERE empleados.ciudad_id = cuidades.id) AS departamento
+FROM
+	empleados;
+GO
 
 -- Mostrar los empleados nacidos en los meses del primer semestre.
 
+SELECT * FROM empleados WHERE MONTH(fechaNacimiento) BETWEEN 1 AND 6
+
+GO
+
 -- Mostrar los empleados que estén en el rango del cargo entre 5 y 20.
+
+SELECT * FROM empleados WHERE cargo_id BETWEEN 5 AND 20
+
+GO
 
 -- Mostrar los nombres de los empleados (no repetidos)
 
+SELECT DISTINCT nombre FROM empleados;
+GO
+
 -- Mostrar las Ciudades tienen la letra: G
+
+SELECT * FROM cuidades WHERE nombre LIKE '%g%' OR nombre LIKE '%G%'
+
+GO
 
 -- Borrar las Ciudades de: Cúcuta y Bucaramanga
 
+DELETE FROM cuidades WHERE nombre = 'Cucuta' OR nombre = 'Bucaramanga'
+
+GO
+
 -- Borrar todos los cargos que no estén registrados en la tabla de Empleados.
+
+DELETE FROM cargos WHERE id NOT IN (SELECT DISTINCT cargo_id from empleados);
