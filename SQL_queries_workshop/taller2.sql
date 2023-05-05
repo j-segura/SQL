@@ -1,3 +1,5 @@
+Autor: Juan David Segura
+
 CREATE DATABASE taller2
 
 GO
