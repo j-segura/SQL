@@ -46,4 +46,9 @@ INSERT INTO appointments(fecha, costumer_id, doctor_id) VALUES('11/11/2023', 100
     ('11/10/2022', 103, 3),
     ('10/10/2023', 104, 1)
 
-
+SELECT
+    costumer.nom as costumer,
+    appointment.id as num_appointment,
+    appointment.fecha as date
+FROM appointments INNER JOIN costumers
+ON appointments.costumer_id = costumers.id
