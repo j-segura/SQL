@@ -30,9 +30,9 @@ CREATE TABLE companies(
 
 INSERT INTO departments(name) VALUES('Antioquia'), ('Cundinamarca')
 
-INSERT INTO cities(name) VALUES('Medellin'), ('Bogota')
+INSERT INTO cities(name) VALUES('Medellin', 1), ('Bogota', 2)
 
-INSERT INTO companies(name) VALUES('Coca Cola'), ('Argos')
+INSERT INTO companies(name) VALUES('Coca Cola', 1), ('Argos', 2)
 
 SELECT
     companies.name as company,
