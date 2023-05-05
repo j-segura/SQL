@@ -1,0 +1,17 @@
+CREATE DATABASE store
+
+GO
+
+USE store
+
+GO
+
+CREATE TABLE products(
+    id INT PRIMARY KEY IDENTITY(1,1),
+    nom VARCHAR(255) NOT NULL,
+)
+
+CREATE TABLE categories(
+    id INT PRIMARY KEY IDENTITY(1,1),
+    nom VARCHAR(255) NOT NULL,
+)
