@@ -62,8 +62,10 @@ INSERT INTO costumers(id, name, lastName, phone, revenues) VALUES
     (1033257726, 'Jesus', 'Vargas', '3455772334', 9765345),
     (1033257725, 'Maria', 'Mona', '3015776344', 2349876),
     (1033257724, 'Gustavo', 'Torrealba', '3011272354', 234567),
-    (1033257728, 'Rosa', 'Lopez', '3015775184', 987634),
-    (1033257728, 'Risaralda', 'Ramirez', '3015772264', 23098765),
-    (1033257728, 'Alejandro', 'Acosta', '3455772484', 2345987),
-    (1033257728, 'Isabela', 'Londoño', '3015776584', 234567),
-    (1033257728, 'Paulina', 'Jaramillo', '3011276384', 98765432),
+    (1033256728, 'Rosa', 'Lopez', '3015775184', 987634),
+    (1033258728, 'Risaralda', 'Ramirez', '3015772264', 23098765),
+    (1033259728, 'Alejandro', 'Acosta', '3455772484', 2345987),
+    (1033252728, 'Isabela', 'Londoño', '3015776584', 234567),
+    (1033257328, 'Paulina', 'Jaramillo', '3011276384', 98765432)
+
+INSERT INTO invoices(product_id, costumer_id, quantity) VALUES(1, 1034257728)
