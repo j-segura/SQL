@@ -54,7 +54,7 @@ INSERT INTO cities VALUES('Barranquilla'),('Medellin'),('Cali'),('Bogota');
 
 INSERT INTO colors VALUES('Rojo'),('Verde'),('Azul'),('Morado'),('Amarillo');
 
-INSERT INTO categories(id, name) VALUES(10, 'A'),(20, 'B'),(30, 'C'),(40, 'D'),
+INSERT INTO categories VALUES('A'),('B'),('C'),('D');
 
 INSERT INTO items(name, city_id) VALUES('Clasificadora', 1),
     ('Perforadora', 2),
@@ -65,7 +65,7 @@ INSERT INTO items(name, city_id) VALUES('Clasificadora', 1),
     ('Cinta', 3),
     ('Clasificadora', 4),
     ('Perforadora', 4),
-    ('Lectora', 1)
+    ('Lectora', 1);
 
 INSERT INTO components(name, color_id, weight,city_id) VALUES
     ("X3A", 1, 12, 1), 
@@ -77,18 +77,18 @@ INSERT INTO components(name, color_id, weight,city_id) VALUES
     ("B85", 2, 17, 3),
     ("C4B", 3, 10, 4),
     ("VT9", 4, 23, 4),
-    ("C31", 5, 30, 1)
+    ("C31", 5, 30, 1);
 
 INSERT INTO providers(name,category_id,city_id) VALUES
-    ('Andres Verjel',10,'Barranquilla'),
-    ('Carlos Villareal',20,'Medellin'),
-    ('Julian Jaramillo',30,'Cali'),
-    ('Jose Perez',40,'Bogota'),
-    ('Andrea Morales',10,'Barranquila'),
-    ('Eva Braunt',20,'Medellin'),
-    ('Christian Mejia',30,'Cali'),
-    ('Natalia Mendoza',40,'Bogota'),
-    ('Daniel Ruiz',40,'Bogota')
+    ('Andres Verjel', 1, 1),
+    ('Carlos Villareal', 2, 2),
+    ('Julian Jaramillo', 3, 3),
+    ('Jose Perez', 4, 4),
+    ('Andrea Morales', 1, 1),
+    ('Eva Braunt', 2, 2),
+    ('Christian Mejia', 3, 3),
+    ('Natalia Mendoza', 4, 4),
+    ('Daniel Ruiz', 4, 4);
 
 INSERT INTO shipments(provider_id, component_id, item_id, quantity, date) VALUES(1, 1, 1, 100, '13/01/2009'),
     (2, 2, 1, 200, '13/01/2009'),
@@ -116,7 +116,7 @@ INSERT INTO shipments(provider_id, component_id, item_id, quantity, date) VALUES
     (6, 4, 1, 400, '8/11/2009'),
     (7, 5, 1, 500, '25/01/2009'),
     (8, 6, 1, 600, '21/01/2009'),
-    (9, 7, 1, 700, '11/5/2009'),
+    (9, 7, 1, 700, '11/5/2009')
 
 
     
