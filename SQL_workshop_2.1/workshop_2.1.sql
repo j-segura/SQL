@@ -43,6 +43,7 @@ CREATE TABLE providers(
 );
 
 CREATE TABLE shipments(
+    id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     provider_id INT FOREIGN KEY REFERENCES providers(id) NOT NULL,
     component_id INT FOREIGN KEY REFERENCES components(id) NOT NULL,
     item_id INT FOREIGN KEY REFERENCES items(id) NOT NULL,
@@ -54,7 +55,7 @@ INSERT INTO cities VALUES('Barranquilla'),('Medellin'),('Cali'),('Bogota');
 
 INSERT INTO colors VALUES('Rojo'),('Verde'),('Azul'),('Morado'),('Amarillo');
 
-INSERT INTO categories VALUES('A'),('B'),('C'),('D');
+INSERT INTO categories VALUES('A'),('B'),('C'),('D')
 
 INSERT INTO items(name, city_id) VALUES('Clasificadora', 1),
     ('Perforadora', 2),
@@ -65,22 +66,20 @@ INSERT INTO items(name, city_id) VALUES('Clasificadora', 1),
     ('Cinta', 3),
     ('Clasificadora', 4),
     ('Perforadora', 4),
-    ('Lectora', 1);
+    ('Lectora', 1)
 
-INSERT INTO components(name, color_id, weight,city_id) VALUES
-    ("X3A", 1, 12, 1), 
-    ("B85", 2, 17, 2),
-    ("C48", 3, 7, 3),
-    ("VT8", 4, 20, 4),
-    ("C30", 5, 30, 1),
-    ("X3A", 1, 54, 2),
-    ("B85", 2, 17, 3),
-    ("C4B", 3, 10, 4),
-    ("VT9", 4, 23, 4),
-    ("C31", 5, 30, 1);
+INSERT INTO components(name, color_id, weight,city_id) VALUES('X3A', 1, 12, 1), 
+    ('B85', 2, 17, 2),
+    ('C48', 3, 7, 3),
+    ('VT8', 4, 20, 4),
+    ('C30', 5, 30, 1),
+    ('X3A', 1, 54, 2),
+    ('B85', 2, 17, 3),
+    ('C4B', 3, 10, 4),
+    ('VT9', 4, 23, 4),
+    ('C31', 5, 30, 1)
 
-INSERT INTO providers(name,category_id,city_id) VALUES
-    ('Andres Verjel', 1, 1),
+INSERT INTO providers(name,category_id,city_id) VALUES('Andres Verjel', 1, 1),
     ('Carlos Villareal', 2, 2),
     ('Julian Jaramillo', 3, 3),
     ('Jose Perez', 4, 4),
@@ -88,7 +87,7 @@ INSERT INTO providers(name,category_id,city_id) VALUES
     ('Eva Braunt', 2, 2),
     ('Christian Mejia', 3, 3),
     ('Natalia Mendoza', 4, 4),
-    ('Daniel Ruiz', 4, 4);
+    ('Daniel Ruiz', 4, 4)
 
 INSERT INTO shipments(provider_id, component_id, item_id, quantity, date) VALUES(1, 1, 1, 100, '13/01/2009'),
     (2, 2, 1, 200, '13/01/2009'),
@@ -117,6 +116,64 @@ INSERT INTO shipments(provider_id, component_id, item_id, quantity, date) VALUES
     (7, 5, 1, 500, '25/01/2009'),
     (8, 6, 1, 600, '21/01/2009'),
     (9, 7, 1, 700, '11/5/2009')
+
+SELECT * FROM categories;
+SELECT * FROM cities;
+SELECT * FROM colors;
+SELECT * FROM components;
+SELECT * FROM items;
+SELECT * FROM providers;
+SELECT * FROM shipments;
+
+-- 1. its required to know the table providers. categories, and cities unique
+
+SELECT
+	providers.name,
+	categories.name as category,
+	cities.name as city
+FROM providers
+JOIN categories ON providers.category_id = categories.id
+JOIN cities ON providers.category_id = cities.id
+
+-- 2. its required  to show the differents providers, whose cities are Bogota and Baranquilla
+
+SELECT
+	providers.name,
+	c.name as city 
+FROM providers
+INNER JOIN cities c ON providers.category_id = c.id
+WHERE c.name = 'Barranquilla' OR c.name = 'Bogota'
+
+-- 3. its required to know components who name is "X3A" and its weigth are between 20 and 60
+
+SELECT * FROM components WHERE name = 'X3A' AND weight BETWEEN 20 AND 60
+
+-- 4. its required to know the quantity of shipments, for each item who city is Baranquilla
+
+SELECT
+	COUNT(*)
+FROM shipments s
+INNER JOIN items i ON s.item_id = i.id
+INNER JOIN cities c ON i.city_id = c.id
+WHERE c.name = 'Barranquilla'
+
+
+-- 5. its required to show how many shipments are realized for each component
+
+SELECT * FROM shipments s INNER JOIN components c ON s.component_id = c.id GROUP BY s.component_id
+
+-- 6. its required to show how many shipments are made for each component which color begins with A
+
+
+
+-- its required to show for each component its name
+
+-- its required to know the components that weight is bigger than 20
+
+-- its required to know the components id that find between 3 and 8
+
+-- its required to know the shipments that had been made since june of 2009
+
 
 
     
