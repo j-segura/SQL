@@ -1,0 +1,31 @@
+CREATE DATABASE vinciv1;
+
+USE vinciv1;
+
+CREATE TABLE users(
+    id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    curriculum VARCHAR(255)
+);
+
+CREATE TABLE social_medias(
+    id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    url VARCHAR(100) NOT NULL,
+    user_id INT FOREIGN KEY REFERENCES users(id)
+);
+
+CREATE TABLE tags(
+    id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+);
+
+CREATE TABLE categories(
+    id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+);
+
+Po
+
