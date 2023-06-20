@@ -89,19 +89,3 @@ SELECT * FROM costumers;
 SELECT * FROM products;
 SELECT * FROM orders;
 SELECT * FROM products_orders;
-
-
--- QUERIES
-
--- 1. Display the employee's name and sales quota, as well as the office code and city. 
-
-SELECT
-    employees.name,
-    employees.quota,
-    offices.name as officeCode,
-    cities.name as city
-FROM employees
-INNER JOIN offices ON offices.id = employees.office_id
-INNER JOIN cities ON cities.id = offices.city_id;
-
--- 2. list in orders table the order's number, value, quantity, from employees table the name, and the position, 
