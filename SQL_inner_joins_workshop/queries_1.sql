@@ -124,7 +124,6 @@ INNER JOIN costumers ON costumers.id = orders.customer_id;
 SELECT
     products.description as 'product description',
     manufacturers.name as 'made in'
-    order
 FROM products
 INNER JOIN manufacturers ON manufacturers.id = products.manufacturer_id
 INNER JOIN products_orders ON products_orders.product_id = products.id
