@@ -8,9 +8,9 @@ SELECT
     employees.name as employe,
     employees.id as employe_number
 FROM offices
-JOIN regions ON regions.id = offices.region_id
-JOIN cities ON cities.id = offices.city_id
-JOIN employees ON offices.id = employees.office_id
+    JOIN regions ON regions.id = offices.region_id
+    JOIN cities ON cities.id = offices.city_id
+    JOIN employees ON offices.id = employees.office_id
 WHERE regions.name = 'East'
 
 -- versión en la que aparecen sólo las que tienen empleados
@@ -22,9 +22,9 @@ SELECT
     cities.name as city,
     COUNT(employees.id) as employees_count
 FROM offices
-JOIN regions ON regions.id = offices.region_id
-JOIN cities ON cities.id = offices.city_id
-LEFT JOIN employees ON offices.id = employees.office_id
+    JOIN regions ON regions.id = offices.region_id
+    JOIN cities ON cities.id = offices.city_id
+    LEFT JOIN employees ON offices.id = employees.office_id
 GROUP BY offices.id, offices.name, regions.name, cities.name
 HAVING COUNT(employees.id) > 0;
 
